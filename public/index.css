@@ -1,0 +1,238 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  background: #ddf8e0;
+}
+
+.container {
+  width: 100%;
+  height: 95vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10%;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e5e5e5;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 90%;
+  border-top: 1px solid #e5e5e5;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid green; */
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 15%;
+  /* border: 1px solid red; */
+}
+
+.headCell {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: initial;
+  justify-content: center;
+  align-items: start;
+}
+
+.cell:hover {
+  background: #f5f5f5;
+}
+
+.cell::before {
+  content: attr(data-date);
+  position: absolute;
+  transform: scale(2);
+  left: 43%;
+  opacity: 0.1;
+  z-index: -1;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.cell .top {
+  height: 20%;
+  margin: 2px;
+}
+
+.cell .bottom {
+  height: 80%;
+}
+
+.cell .bottom ul {
+  font-size: 0.7rem;
+  width: 100%;
+  height: min-content;
+  padding: 3px;
+}
+
+.cell .bottom li {
+  list-style: none;
+}
+
+.cell .bottom p {
+  font-size: 0.8rem;
+  padding: 3px;
+}
+
+.btn {
+  padding: 5px;
+  border: 1px solid rgb(0, 218, 73);
+  background-color: aquamarine;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: ease-in 0.1s;
+}
+
+/* styling form */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: max-content;
+  /* border: 1px solid red; */
+}
+
+.form-element {
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid rgb(0, 218, 73); */
+  background-color: rgb(244, 255, 246);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.form-element input {
+  width: 80%;
+  padding: 4px;
+  margin: 4px;
+  border: 0.5px solid rgb(213, 228, 219);
+  border-radius: 8px;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.4rem;
+}
+
+.form-element input[type="submit"] {
+  padding: 5px;
+  border: 1px solid rgb(0, 218, 73);
+  border-radius: 8px;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  border: 1px solid rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.37);
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+
+.modalContainer .modal {
+  border: 1px solid rgb(255, 255, 255);
+  width: 70%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: white;
+  z-index: 9;
+  padding-top: 40px;
+}
+
+.modalContainer .modal .inputs {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+.modalContainer .modal .buttons {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+.modalContainer .modal input[type="text"] {
+  margin: auto;
+  border: none;
+  width: 80%;
+}
+
+.modalContainer .modal textarea {
+  border: none;
+}
