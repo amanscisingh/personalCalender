@@ -12,6 +12,7 @@ const Cell = ({ day=0, data }) => {
 
     let tasks = data.tasks || [];
     let note = data.note || "";
+    data.day = day;
 
     function renderBullet (isDone) {
         if (isDone) {

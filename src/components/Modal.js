@@ -1,12 +1,14 @@
 import React, { useContext, usestate } from 'react'
 import {Context} from '../contexts/Context'
+import axios from 'axios';
 
 const Modal = () => {
-    const { visibility, setVisibility, modalData, setModalData } = useContext(Context);
+    const { visibility, setVisibility, modalData, setModalData, date, email } = useContext(Context);
     let tasks = modalData.tasks || [];
     let note = modalData.note || '';
+    let url = 'http://calenderbackend-env.eba-2g25ruwk.ap-south-1.elasticbeanstalk.com/api';
     console.log(modalData);
-
+    console.log('day', modalData.day);
 
     function handleAddTask () {
         let newTask = {
@@ -16,8 +18,19 @@ const Modal = () => {
         setModalData({...modalData, tasks: [...tasks, newTask]});
     }
 
-    function handleSave () {
+    async function handleSave () {
+        let newData = {
+            user: email,
+            data: {
+                date: date + ' ' + modalData.day,
+                value: modalData.tasks,
+                note: modalData.note,
+            }
+        }
 
+        // post request to server
+        let savedData = await axios.post(url, newData);
+        console.log(savedData);
     }
 
     function handleCheckBox(i) {

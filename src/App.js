@@ -15,7 +15,7 @@ const App = () => {
     console.log(email);
 
     let dateArray = date.toString().split(' ');
-
+    let dateString = dateArray[3] + ' ' + dateArray[1]
 
     let [dayData, setDayData] = useState({});
 
@@ -67,7 +67,7 @@ const App = () => {
     if (isEmail) {
         return (
             <div className="container">
-                <Context.Provider value={{ visibility, setVisibility, modalData, setModalData }}>
+                <Context.Provider value={{ visibility, setVisibility, modalData, setModalData, date: dateString , email }}>
                     <Modal />
                     <Header date={date} next={nextMonth} prev={prevMonth} />
                     <Calender date={date} dayData={dayData || {}} />
