@@ -23,9 +23,13 @@ mongoose.connect(MONGODB_URI, {
 app.engine(".hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", ".hbs");
 
+
+const cors = require("cors");
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/', require('./routes/home'));
+app.use('/api', require('./routes/api'));
