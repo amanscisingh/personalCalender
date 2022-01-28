@@ -6,13 +6,13 @@ const Modal = () => {
     const { visibility, setVisibility, modalData, setModalData, date, email } = useContext(Context);
     let tasks = modalData.tasks || [];
     let note = modalData.note || '';
-    let url = 'http://calenderbackend-env.eba-2g25ruwk.ap-south-1.elasticbeanstalk.com/api';
+    let url = 'https://calender-backend001.herokuapp.com/api';
     console.log(modalData);
     console.log('day', modalData.day);
 
     function handleAddTask () {
         let newTask = {
-            title: 'Name Your Task',
+            title: '',
             isDone: false
         }
         setModalData({...modalData, tasks: [...tasks, newTask]});
@@ -31,6 +31,11 @@ const Modal = () => {
         // post request to server
         let savedData = await axios.post(url, newData);
         console.log(savedData);
+        if (savedData.status === 200) {
+            alert("Saved Successfully!!!");
+            window.location.reload();
+
+        }
     }
 
     function handleCheckBox(i) {
@@ -77,14 +82,14 @@ const Modal = () => {
                     return (
                         <div className='inputs' key={i}>
                             <input type="checkbox" checked={task.isDone} onChange={() => handleCheckBox(i) } />
-                            <input type="text" value={task.title} onChange={(e) => {handleTaskInput(i, e.target.value)}}/>
+                            <input type="text" placeholder={`Task ${i+1}`} value={task.title} onChange={(e) => {handleTaskInput(i, e.target.value)}}/>
                             <button onClick={() => handleDeleteTask(i)}>🗑️</button>
                         </div>
                     )
                 })}
 
                 <h3>Note</h3>
-                <textarea value={note} onChange={(e) => setModalData({...modalData, note: e.target.value }) }></textarea>
+                <textarea value={note} placeholder="Type Note of the day..." onChange={(e) => setModalData({...modalData, note: e.target.value }) }></textarea>
                 
                 <div className="buttons">
                     <button className="btn" onClick={handleAddTask}>Add Task</button>

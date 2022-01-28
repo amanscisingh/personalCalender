@@ -20,7 +20,7 @@ const App = () => {
     let [dayData, setDayData] = useState({});
 
     // api calls start
-    let url = 'http://calenderbackend-env.eba-2g25ruwk.ap-south-1.elasticbeanstalk.com/api';
+    let url = 'https://calender-backend001.herokuapp.com/api';
     async function getData() {
         const response = await axios.get(url+`?year=${parseInt(dateArray[3])}&month=${dateArray[1]}&email=${email}`);
         let data = response.data;
