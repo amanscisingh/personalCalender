@@ -22,7 +22,10 @@ const Cell = ({ day=0, data }) => {
             return '🟢'
         } else return '🔴';
     }
-
+    let allDots = tasks.map((task, i) => {
+        return <span key={i}>{renderBullet(task.isDone)}</span>
+    })
+    
     const classText = (new Date().getDate() === day) ? 'cell today' : 'cell';
     
     return (
@@ -48,16 +51,17 @@ const Cell = ({ day=0, data }) => {
 
             <div className="bottom">
 
-                <ul>
-                    {tasks.map((item, index) => {
+                <div className='dots'>
+                    {/* {tasks.map((item, index) => {
                         return (
-                            <li key={index}>
-                                {renderBullet(item.isDone)} {item.title}
-                            </li>
+                            <>
+                                {renderBullet(item.isDone)}
+                            </>
+                            
                         )
-                    })}
-
-                </ul>
+                    })} */}
+                    {allDots}
+                </div>
                 
                 <p>{note}</p>
             </div>

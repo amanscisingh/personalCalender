@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  /* height: 100%; */
 }
 
 body {
@@ -12,6 +13,10 @@ body {
 
 h1 {
   font-size: 3em;
+}
+
+h2 {
+  font-size: 1.8em;
 }
 
 .container {
@@ -27,13 +32,29 @@ h1 {
 
 .top-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
-  height: 10%;
+  height: 20%;
   background: #f5f5f5;
   border-bottom: 1px solid #e5e5e5;
+}
+
+.top-container .top {
+  display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
+  height: 40%;
+}
+
+.top-container .bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 60%;
 }
 
 .bottom-container {
@@ -42,7 +63,7 @@ h1 {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 90%;
+  height: 80%;
   border-top: 1px solid #e5e5e5;
 }
 
@@ -65,7 +86,7 @@ h1 {
 .headCell {
   width: 100%;
   height: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -76,7 +97,7 @@ h1 {
   position: relative;
   width: 100%;
   height: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-top: none;
   display: flex;
   flex-direction: column;
@@ -87,8 +108,9 @@ h1 {
 }
 
 .cell.today {
-  background-color: aquamarine;
-  border-top: 1px solid black;
+  background-color: rgb(125, 255, 153);
+  border: 0px solid black;
+  border-radius: 5px;
 }
 
 .cell::-webkit-scrollbar {
@@ -97,10 +119,11 @@ h1 {
 
 .cell:hover {
   background: #f5f5f5;
+  border-radius: 5px;
 }
 
 .cell::before {
-  content: attr(data-date);
+  /* content: attr(data-date); */
   position: absolute;
   transform: scale(2);
   left: 43%;
@@ -110,15 +133,23 @@ h1 {
 }
 
 .cell .top {
-  height: 20%;
+  height: 30%;
   margin: 2px;
+  margin: auto;
+}
+
+.cell .top h3 {
+  margin-top: 10px;
 }
 
 .cell .bottom {
-  height: 80%;
+  height: 70%;
+  margin: auto;
 }
 
-.cell .bottom ul {
+.cell .bottom .dots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   font-size: 0.7rem;
   width: 100%;
   height: min-content;
@@ -200,18 +231,36 @@ h1 {
   align-items: center;
 }
 
+/* animation for modal container */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .modalContainer {
   border: 1px solid rgb(255, 255, 255);
   background-color: rgba(0, 0, 0, 0.37);
   position: absolute;
+  /* top: -100px; */
   display: block;
   width: 100%;
   height: 100%;
+  animation: fadeIn 0.5s ease-in-out;
   z-index: 9;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 .modalContainer .modal {
   border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  margin-top: 10px;
   width: 70%;
   height: 70%;
   display: flex;
@@ -223,6 +272,13 @@ h1 {
   z-index: 9;
   padding-top: 40px;
   overflow-y: scroll;
+}
+
+/* media query for tablet and desktop */
+@media only screen and (min-width: 600px) {
+  .modalContainer .modal {
+    width: 50%;
+  }
 }
 
 .modalContainer .modal::-webkit-scrollbar {
@@ -268,6 +324,16 @@ h1 {
 /* loading page starts */
 
 /* css for loading page that covers full screen */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .fullScreen {
   position: fixed;
   display: flex;
@@ -278,13 +344,59 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 9;
-  animation: infinite 0.5s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
   /* transition: ease-in 0.5s; */
   /* transform: scale(1); */
 }
 
 .false {
   display: none;
+}
+
+/* css for search bar */
+/* .globalSearchBar {
+  width: 80%;
+  height: 45%;
+  font-size: 1.85em;
+  text-align: center;
+  margin-top: 25px;
+  border: 0.5px gray solid;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.globalSearchBar:focus {
+  outline: none;
+  background-color: rgb(230, 255, 230);
+  /* color: red; */
+
+.input-icons i {
+  position: absolute;
+}
+
+.input-icons {
+  width: 80%;
+  margin-top: 15px;
+}
+
+.icon {
+  padding: 10px;
+  color: green;
+  min-width: 70px;
+  text-align: center;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  text-align: center;
+}
+
+.input-field:focus {
+  outline: none;
+  /* background-color: rgb(230, 255, 230); */
+  /* color: red; */
 }

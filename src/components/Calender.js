@@ -61,13 +61,13 @@ const Calender = ({date, dayData }) => {
         <div className='bottom-container'>
         
             <div className="headerRow">
-                <div className="headCell">Sun</div>
-                <div className="headCell">Mon</div>
-                <div className="headCell">Tue</div>
-                <div className="headCell">Wed</div>
-                <div className="headCell">Thu</div>
-                <div className="headCell">Fri</div>
-                <div className="headCell">Sat</div>
+                <div className="headCell"><h2>S</h2></div>
+                <div className="headCell"><h2>M</h2></div>
+                <div className="headCell"><h2>T</h2></div>
+                <div className="headCell"><h2>W</h2></div>
+                <div className="headCell"><h2>T</h2></div>
+                <div className="headCell"><h2>F</h2></div>
+                <div className="headCell"><h2>S</h2></div>
             </div>
             <div className="row">
                 <Cell day={dataArray[0].date} data={dataArray[0].data}/>
