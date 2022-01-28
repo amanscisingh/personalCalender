@@ -5,10 +5,12 @@ import Intro from './components/Intro';
 import Modal from './components/Modal';
 import axios from 'axios';
 import {Context} from './contexts/Context';
+import Wait from './components/Wait';
 
 const App = () => {
     const [visibility, setVisibility] = useState('none');
     const [modalData, setModalData] = useState({});
+    const [loader, setLoader] = useState('');
     const [date, setDate] = useState(new Date());
     var email = localStorage.getItem('email');
     email = JSON.parse(email);
@@ -35,6 +37,7 @@ const App = () => {
         }
         // setDataArray2(dataArray);
         setDayData(dayDataObj);
+        setLoader('false');
 
         return dayDataObj;
     }
@@ -53,21 +56,26 @@ const App = () => {
     }
 
     function nextMonth() {
+        setLoader('true');
         const newDate = new Date(date);
         newDate.setMonth(date.getMonth() + 1);
         setDate(newDate);
     }
 
     function prevMonth() {
+        setLoader('true');
         const newDate = new Date(date);
         newDate.setMonth(date.getMonth() - 1);
         setDate(newDate);
     }
 
+    // add global style font-family: 'Poppins', sans-serif;
+
     if (isEmail) {
         return (
-            <div className="container">
-                <Context.Provider value={{ visibility, setVisibility, modalData, setModalData, date: dateString , email }}>
+            <div className="container" style={ { fontFamily: 'Poppins , sans-serif', } } >
+                <Context.Provider value={{ visibility, setVisibility, modalData, setModalData, date: dateString , email, setLoader, loader }}>
+                    <Wait />
                     <Modal />
                     <Header date={date} next={nextMonth} prev={prevMonth} />
                     <Calender date={date} dayData={dayData || {}} />
