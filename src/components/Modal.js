@@ -33,6 +33,31 @@ const Modal = () => {
         let savedData = await axios.post(url, newData);
         console.log(savedData);
         if (savedData.status === 200) {
+            setVisibility('none');
+            window.location.reload();
+            // setLoader('false');
+            // console.log('saved');
+            // alert("Saved Successfully!!!");
+        }
+    }
+
+    async function handleProcrastinate (i) {
+        setLoader('true');
+        let newData = {
+            email: email,
+            date: date + ' ' + modalData.day,
+            data: modalData.tasks[i]
+        }
+
+        console.table(newData);
+
+        // post request to server
+        url+= '/procrastinate';
+        let savedData = await axios.post(url, newData);
+        console.table(savedData.data);
+        if (savedData.status === 200) {
+            setVisibility('none');
+            window.location.reload();
             setLoader('false');
             // console.log('saved');
             // alert("Saved Successfully!!!");
@@ -79,7 +104,7 @@ const Modal = () => {
             if (e.target === modalCont) {
                 console.log('modal clicked');
                 setVisibility('none');
-                window.location.reload();
+                // window.location.reload();
             } else {
                 // console.log('modal not clicked');
             }
@@ -110,17 +135,19 @@ const Modal = () => {
 
                             </div>
                             <button className='btn-fa  red' onClick={() => handleDeleteTask(i)}> <i className='fa fa-trash fa-lg ic'></i> </button>
-                            <button className='btn-fa  blue' onClick={() => handleDeleteTask(i)}> <i className='fa fa-forward fa-lg ic'></i> </button>
+                            <button className='btn-fa  blue' onClick={() => handleProcrastinate(i)}> <i className='fa fa-forward fa-lg ic'></i> </button>
                         </div>
                     )
                 })}
 
-                <h3>Note</h3>
-                <textarea value={note} placeholder="Type Note of the day..." onChange={(e) => setModalData({...modalData, note: e.target.value }) }></textarea>
+                <div className="textarea">
+                    <h3>Note</h3>
+                    <textarea value={note} placeholder="Type Note of the day..." onChange={(e) => setModalData({...modalData, note: e.target.value }) }></textarea>
+                </div>
                 
                 <div className="buttons">
-                    <button className="btn" onClick={handleAddTask}>Add Task</button>
-                    <button className="btn" onClick={handleSave}>Save</button>
+                    <button className="btn-fa-cross add blue" onClick={handleAddTask}><i className='fa fa-plus fa-2x ic'></i></button>
+                    <button className="btn-fa-cross green" onClick={handleSave}><i className='fa fa-floppy-o fa-2x ic'></i></button>
                     
                 </div>
 

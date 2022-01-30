@@ -6,16 +6,18 @@ import Modal from './components/Modal';
 import axios from 'axios';
 import {Context} from './contexts/Context';
 import Wait from './components/Wait';
+import SearchModal from './components/SearchModal';
 
 const App = () => {
     const [visibility, setVisibility] = useState('none');
     const [modalData, setModalData] = useState({});
-    const [searchKey, setSearchKey] = useState('');
+    const [searchData, setSearchData] = useState([]);
+    const [showSearch, setShowSearch] = useState('');
     const [loader, setLoader] = useState('');
     const [date, setDate] = useState(new Date());
     var email = localStorage.getItem('email');
     email = JSON.parse(email);
-    console.log(email);
+    // console.log(email);
 
     let dateArray = date.toString().split(' ');
     let dateString = dateArray[3] + ' ' + dateArray[1]
@@ -27,7 +29,7 @@ const App = () => {
     async function getData() {
         const response = await axios.get(url+`?year=${parseInt(dateArray[3])}&month=${dateArray[1]}&email=${email}`);
         let data = response.data;
-        console.log(data);
+        // console.log(data);
         let dayDataObj = {};
         for (let i = 0; i < data.length; i++) {
             dayDataObj[parseInt(data[i].data.date.split(' ')[2])] = {
@@ -41,6 +43,21 @@ const App = () => {
         setLoader('false');
 
         return dayDataObj;
+    }
+    console.table(searchData);
+
+    async function handleSearch (input) {
+        // get request to server
+        const response = await axios.get(url+'/search'+`?keyword=${input}&email=${email}`);
+        let data = response.data;
+        // console.log(response.status);
+        // console.table(data || []);
+
+        if (response.status === 200) {
+            setSearchData(data || []);
+            // console.log('saved');
+            // alert("Saved Successfully!!!");
+        }
     }
     
     useEffect(() => {
@@ -75,9 +92,10 @@ const App = () => {
     if (isEmail) {
         return (
             <div className="container" style={ { fontFamily: 'Poppins , sans-serif', } } >
-                <Context.Provider value={{ visibility, setVisibility, modalData, setModalData, date: dateString , email, setLoader, loader, searchKey, setSearchKey }}>
+                <Context.Provider value={{ visibility, setVisibility, modalData, setModalData, date: dateString , email, setLoader, loader, searchData, handleSearch, showSearch, setShowSearch }}>
                     <Wait />
                     <Modal />
+                    <SearchModal />
                     <Header date={date} next={nextMonth} prev={prevMonth} />
                     <Calender date={date} dayData={dayData || {}} />
                 </Context.Provider>

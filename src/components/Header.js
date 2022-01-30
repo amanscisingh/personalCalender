@@ -1,8 +1,10 @@
 import React from 'react'
 import rightArrow from '../images/right-arrow.png';
 import leftArrow from '../images/left-arrow.png';
+import { Context } from '../contexts/Context';
 
 const Header = ({ date, next, prev }) => {
+    const { handleSearch, setLoader, showSearch, setShowSearch } = React.useContext(Context);
     let dateArray = date.toString().split(' ');
     console.log(dateArray);
     let dateString = dateArray[1] + ', ' + dateArray[3];
@@ -15,7 +17,19 @@ const Header = ({ date, next, prev }) => {
                 </i>
                     <input class="input-field" 
                         type="search" 
-                        placeholder="Search" />
+                        placeholder="Search"
+                        onChange={(e)=>{ 
+                            if (e.target.value) {
+                                handleSearch(e.target.value);
+                                setShowSearch('show');
+                                
+                            } else {
+                                console.log('aborted');
+                                setShowSearch('');
+                                
+                            }
+                         }} 
+                        />
                 </div>
 
             </div>
