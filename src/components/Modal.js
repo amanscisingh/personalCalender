@@ -130,7 +130,7 @@ const Modal = () => {
                         <div className='input-top'>
                             <div className='inputs' key={i}>
                                 <input type="checkbox" checked={task.isDone} onChange={() => handleCheckBox(i) } />
-                                <input type="text" placeholder={`Task ${i+1}`} value={task.title || `Task ${i+1}`} onChange={(e) => {handleTaskInput(i, e.target.value)}}/>
+                                <input type="text" placeholder={`Task ${i+1}`} value={task.title || " "} onChange={(e) => {handleTaskInput(i, e.target.value)}}/>
                                 
 
                             </div>
