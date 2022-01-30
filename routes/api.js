@@ -112,7 +112,7 @@ apiRouter.post('/procrastinate', async (req, res) => {
 
         // find a date next to date
         let newDate = new Date(date);
-        newDate.setDate(newDate.getDate() + 2);
+        newDate.setDate(newDate.getDate() + 1);
         newDate = newDate.toUTCString().split(',')[1].split(' ')[3] + " " + newDate.toUTCString().split(',')[1].split(' ')[2] + " " + parseInt(newDate.toUTCString().split(',')[1].split(' ')[1]).toString(); 
         console.log(newDate);
 
