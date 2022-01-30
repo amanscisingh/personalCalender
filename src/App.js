@@ -10,6 +10,7 @@ import Wait from './components/Wait';
 const App = () => {
     const [visibility, setVisibility] = useState('none');
     const [modalData, setModalData] = useState({});
+    const [searchKey, setSearchKey] = useState('');
     const [loader, setLoader] = useState('');
     const [date, setDate] = useState(new Date());
     var email = localStorage.getItem('email');
@@ -74,7 +75,7 @@ const App = () => {
     if (isEmail) {
         return (
             <div className="container" style={ { fontFamily: 'Poppins , sans-serif', } } >
-                <Context.Provider value={{ visibility, setVisibility, modalData, setModalData, date: dateString , email, setLoader, loader }}>
+                <Context.Provider value={{ visibility, setVisibility, modalData, setModalData, date: dateString , email, setLoader, loader, searchKey, setSearchKey }}>
                     <Wait />
                     <Modal />
                     <Header date={date} next={nextMonth} prev={prevMonth} />

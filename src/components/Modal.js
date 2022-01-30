@@ -3,7 +3,7 @@ import {Context} from '../contexts/Context'
 import axios from 'axios';
 
 const Modal = () => {
-    const { visibility, setVisibility, modalData, setModalData, date, email } = useContext(Context);
+    const { visibility, setVisibility, modalData, setModalData, date, email,setLoader } = useContext(Context);
     let tasks = modalData.tasks || [];
     let note = modalData.note || '';
     let url = 'https://calender-backend001.herokuapp.com/api';
@@ -19,6 +19,7 @@ const Modal = () => {
     }
 
     async function handleSave () {
+        setLoader('true');
         let newData = {
             user: email,
             data: {
@@ -32,9 +33,9 @@ const Modal = () => {
         let savedData = await axios.post(url, newData);
         console.log(savedData);
         if (savedData.status === 200) {
-            alert("Saved Successfully!!!");
-            window.location.reload();
-
+            setLoader('false');
+            // console.log('saved');
+            // alert("Saved Successfully!!!");
         }
     }
 
@@ -69,21 +70,47 @@ const Modal = () => {
         })
     }
 
+    const modalContainer = React.useRef(null);
+    const modalCont = modalContainer.current;
+    console.log(modalCont);
+    // const modal = modalContainer.current.children[0];
+    if(modalCont) {
+        modalCont.addEventListener('click', (e) => {
+            if (e.target === modalCont) {
+                console.log('modal clicked');
+                setVisibility('none');
+                window.location.reload();
+            } else {
+                // console.log('modal not clicked');
+            }
+        })
+
+    }
+
     return (
-        <div className='modalContainer' style= {
+        <div className='modalContainer' ref = {modalContainer} style= {
             {
                 display: visibility
             }
+            
         }>
             <div className="modal">
+                <button className="btn-fa-cross" onClick={ ()=> {
+                    setVisibility('none');
+                    window.location.reload();
+                } }><i class="fa fa-times-circle fa-3x" aria-hidden="true"></i></button>
                 <h3>Task</h3>
                 {tasks.map((task, i) => {
-                    console.log(task._id);
                     return (
-                        <div className='inputs' key={i}>
-                            <input type="checkbox" checked={task.isDone} onChange={() => handleCheckBox(i) } />
-                            <input type="text" placeholder={`Task ${i+1}`} value={task.title} onChange={(e) => {handleTaskInput(i, e.target.value)}}/>
-                            <button onClick={() => handleDeleteTask(i)}>🗑️</button>
+                        <div className='input-top'>
+                            <div className='inputs' key={i}>
+                                <input type="checkbox" checked={task.isDone} onChange={() => handleCheckBox(i) } />
+                                <input type="text" placeholder={`Task ${i+1}`} value={task.title || `Task ${i+1}`} onChange={(e) => {handleTaskInput(i, e.target.value)}}/>
+                                
+
+                            </div>
+                            <button className='btn-fa  red' onClick={() => handleDeleteTask(i)}> <i className='fa fa-trash fa-lg ic'></i> </button>
+                            <button className='btn-fa  blue' onClick={() => handleDeleteTask(i)}> <i className='fa fa-forward fa-lg ic'></i> </button>
                         </div>
                     )
                 })}
@@ -94,9 +121,7 @@ const Modal = () => {
                 <div className="buttons">
                     <button className="btn" onClick={handleAddTask}>Add Task</button>
                     <button className="btn" onClick={handleSave}>Save</button>
-                    <button className="btn" onClick={ ()=> {
-                        setVisibility('none')
-                    } }>Close</button>
+                    
                 </div>
 
 

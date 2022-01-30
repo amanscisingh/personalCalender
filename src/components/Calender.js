@@ -37,20 +37,20 @@ const Calender = ({date, dayData }) => {
     }
 
     dayIndex = (dayIndex + 28) % 7;
-    console.log(dayIndex);
+    // console.log(dayIndex);
 
     let initialReferenceDay = parseInt(dayIndex);
-    console.log(initialReferenceDay);
+    // console.log(initialReferenceDay);
 
     // iterate over dayData object and add to dataArray
     for (let day in dayData) {
-        console.log(day);
+        // console.log(day);
         dataArray[parseInt(day)+initialReferenceDay].data = dayData[day];
     }
 
     while(day<=totalDays) {
-        console.log(dayIndex);
-        console.log(dataArray[dayIndex].date);
+        // console.log(dayIndex);
+        // console.log(dataArray[dayIndex].date);
         dataArray[dayIndex].date = day;
         day++;
         dayIndex++;
