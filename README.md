@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Personal Calender Prototype 
 
 A single-page interactive web app using React Js for the purpose of managing and monitoring the daily tasks of a user. Users can create daily tasks, mark them done/undone and add notes for day. He can also procrastinate the task if he wants to do it later.
 
