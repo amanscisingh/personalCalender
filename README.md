@@ -6,9 +6,10 @@ A single-page interactive web app using React Js for the purpose of managing and
 [Youtube Link](https://youtu.be/y7WbhfbZaLI)
 
 ## Screenshots
-![image](https://user-images.githubusercontent.com/68449680/199522073-cc0ae947-8a01-49b8-82ed-abc8dfdb9ad7.png) <br>
+![image](https://user-images.githubusercontent.com/68449680/199523915-5e9dbfb2-726e-444b-9fce-8b240d6e64a4.png) <br>
 Enter your email to continue
 <hr>
+
 ![image](https://user-images.githubusercontent.com/68449680/199522371-5216c7b8-9788-4867-a112-dde704d8103a.png) <br>
 Calender loaded month wise <br>
 <ul>
@@ -17,6 +18,7 @@ Calender loaded month wise <br>
   <li> Search bar to search from all tasks using keywords </li>
 </ul>
 <hr>
+
 ![image](https://user-images.githubusercontent.com/68449680/199522988-3d6aec27-c2ba-4585-97e6-8551b443d5c8.png) <br>
 On clicking the cell you can create tasks and note for the day.
 <hr>
